@@ -10,12 +10,43 @@
 	        </button>
 	      </div>
 	      <div class="modal-body">
-	        <p>Username: {{ user.username }}</p>
-	        <p>Email:  {{ user.email }}</p>
-	        <p v-if="user.address">Address:  {{ user.address.city }}</p>
-	        <p>Phone:  {{ user.phone }}</p>
-	        <p>Website:  {{ user.website }}</p>
-	        <p v-if="user.company">Company:  {{ user.company.name }}</p>
+	      	<table class="user-tbl">
+	      		<thead></thead>
+	      		<tbody>
+	      			<tr>
+	      				<td>Username</td>
+	      				<td><strong>{{ user.username }}</strong></td>
+	      			</tr>
+	      			<tr>
+	      				<td>Email</td>
+	      				<td><a :href="'mailto:' + user.email">{{ user.email }}</a></td>
+	      			</tr>
+	      			<tr>
+	      				<td>Street Address</td>
+	      				<td v-if="user.address"><span v-if="user.address.suite">{{ user.address.suite }},</span><span v-if="user.address.street">{{ user.address.street }}</span></td>
+	      			</tr>
+	      			<tr>
+	      				<td>City</td>
+	      				<td v-if="user.address">{{ user.address.city }}</td>
+	      			</tr>
+	      			<tr>
+	      				<td>Zipcode</td>
+	      				<td v-if="user.address">{{ user.address.zipcode }}</td>
+	      			</tr>
+	      			<tr>
+	      				<td>Phone</td>
+	      				<td>{{ user.phone }}</td>
+	      			</tr>
+	      			<tr>
+	      				<td>Website</td>
+	      				<td><a :href="'http://' + user.website" target="_blank">{{ user.website }}</a></td>
+	      			</tr>
+	      			<tr>
+	      				<td>Company</td>
+	      				<td v-if="user.company">{{ user.company.name }}</td>
+	      			</tr>
+	      		</tbody>
+	      	</table>
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -45,5 +76,10 @@ export default {
 </script>
 
 <style scoped>
-
+.user-tbl tr td{
+	padding:10px;
+}
+.user-tbl tr td:first-child{
+	padding-right:30px;
+}
 </style>
